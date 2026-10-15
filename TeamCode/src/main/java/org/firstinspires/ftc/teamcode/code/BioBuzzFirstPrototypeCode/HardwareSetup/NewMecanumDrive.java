@@ -1,16 +1,13 @@
-package org.firstinspires.ftc.teamcode.code;
+package org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.HardwareSetup;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-
-class MecanumDriveSetup{
+public class NewMecanumDrive{
     private DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     private IMU imu;
 
@@ -37,7 +34,7 @@ class MecanumDriveSetup{
 
     }
 
-    public void drive(double forward, double strafe, double rotate){
+    public void drive(double forward, double strafe, double rotate, boolean slowMode){
         double frontLeftPower = forward + strafe + rotate;
         double backLeftPower = forward - strafe + rotate;
         double frontRightPower = forward - strafe - rotate;
@@ -48,16 +45,22 @@ class MecanumDriveSetup{
         maxPower = Math.max(maxPower, Math.abs(backLeftPower));
         maxPower = Math.max(maxPower, Math.abs(frontRightPower));
         maxPower = Math.max(maxPower, Math.abs(backRightPower));
-
-        frontLeftMotor.setPower(frontLeftPower/maxPower);
-        frontRightMotor.setPower(frontRightPower/maxPower);
-        backLeftMotor.setPower(backLeftPower/maxPower);
-        backRightMotor.setPower(backRightPower/maxPower);
+        if(slowMode){
+            frontLeftMotor.setPower((frontLeftPower/maxPower)*(0.05));
+            frontRightMotor.setPower((frontRightPower/maxPower)*(0.05));
+            backLeftMotor.setPower((backLeftPower/maxPower)*(0.05));
+            backRightMotor.setPower((backRightPower/maxPower)*(0.05));
+        }else{
+            frontLeftMotor.setPower(frontLeftPower/maxPower);
+            frontRightMotor.setPower(frontRightPower/maxPower);
+            backLeftMotor.setPower(backLeftPower/maxPower);
+            backRightMotor.setPower(backRightPower/maxPower);
+        }
 
 
     }
 
-    public void driveFieldRelative(double forward, double strafe, double rotate){
+    public void driveFieldRelative(double forward, double strafe, double rotate, boolean slowMode){
         double theta = Math.atan2(forward, strafe);
         double r = Math.hypot(strafe,forward);
 
@@ -65,27 +68,6 @@ class MecanumDriveSetup{
         double newForward = r * Math.sin(theta);
         double newStrafe = r * Math.cos(theta);
 
-        this.drive(newForward,newStrafe,rotate);
+        this.drive(newForward,newStrafe,rotate, slowMode);
     }
-}
-
-@TeleOp
-public class MecanumDriveOpMode extends OpMode {
-    MecanumDriveSetup drive = new MecanumDriveSetup();
-    double forward, strafe, rotate;
-    @Override
-    public void init() {
-        drive.init(hardwareMap);
-    }
-
-    @Override
-    public void loop() {
-        forward = gamepad1.left_stick_y;
-        strafe = gamepad1.left_stick_x;
-        rotate = gamepad1.right_stick_x;
-        drive.driveFieldRelative(forward,strafe,rotate);
-
-    }
-
-
 }
