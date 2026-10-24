@@ -1,11 +1,25 @@
 name: "Robot Configuration File"
+#implemented
 frontLeftDriveName: "front_left_drive"
+#implemented
 frontRightDriveName: "front_right_drive"
+#implemented
 backLeftDriveName: "back_left_drive"
+#implemented
 backRightDriveName: "back_right_drive"
+#implemented
 imuName: "imu"
+#implemented
 shootingServoName: "shooting_servo"
+#NOT implemented
 limelightName: "limelight"
+#implemented
 intakeMotorName: "intake_motor"
+#implemented
 flywheelMotor1Name: "flywheel_1"
+#implemented
 flywheelMotor2Name: "flywheel_2"
+#implemented
+flowerIntakeServo1: "flower_intake_servo_1"
+#implemented
+flowerIntakeServo2: "flower_intake_servo_2"
