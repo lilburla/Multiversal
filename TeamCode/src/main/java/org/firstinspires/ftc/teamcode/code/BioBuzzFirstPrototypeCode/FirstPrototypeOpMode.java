@@ -11,6 +11,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.HardwareSetup.NewMecanumDrive;
 import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.HardwareSetup.NewMotor;
 import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.HardwareSetup.NewPositionalServo;
+import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util.RobotConfig;
+import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util.RobotConfigReader;
 /*
 SO FAR I HAVE FINISHED:
 INTAKE AND OUTTAKE (change keybinds though i cant find back right and back left button)
@@ -22,18 +24,19 @@ public class FirstPrototypeOpMode extends OpMode {
     //Mecanum Drive
     NewMecanumDrive drive = new NewMecanumDrive();
     double forward, strafe, rotate;
+    RobotConfig config = RobotConfigReader.read(hardwareMap);
 
     //Shooting and flywheels
-    NewPositionalServo shootingServo = new NewPositionalServo(hardwareMap, "shooting_servo");
-    NewMotor flyWheelMotor1 = new NewMotor(hardwareMap, "flywheel_1");
-    NewMotor flyWheelMotor2 = new NewMotor(hardwareMap, "flywheel_2");
+    NewPositionalServo shootingServo = new NewPositionalServo(hardwareMap, config.getShootingServoName());
+    NewMotor flyWheelMotor1 = new NewMotor(hardwareMap, config.getFlywheelMotor1Name());
+    NewMotor flyWheelMotor2 = new NewMotor(hardwareMap, config.getFlywheelMotor2Name());
 
     //Intake/Outtake Motors
-    NewMotor intakeMotor = new NewMotor(hardwareMap, "intake_motor");
+    NewMotor intakeMotor = new NewMotor(hardwareMap, config.getIntakeMotorName());
 
     //Flower intake servos flower_intake_servo_1
-    NewPositionalServo flowerIntakeServo1 = new NewPositionalServo(hardwareMap, "flower_intake_servo_1");
-    NewPositionalServo flowerIntakeServo2 = new NewPositionalServo(hardwareMap, "flower_intake_servo_2");
+    NewPositionalServo flowerIntakeServo1 = new NewPositionalServo(hardwareMap, config.getFlowerIntakeServo1Name());
+    NewPositionalServo flowerIntakeServo2 = new NewPositionalServo(hardwareMap, config.getFlowerIntakeServo2Name());
 
     //booleans
     boolean leftTriggerPressed, rightTriggerPressed, m1Pressed, m2Pressed;

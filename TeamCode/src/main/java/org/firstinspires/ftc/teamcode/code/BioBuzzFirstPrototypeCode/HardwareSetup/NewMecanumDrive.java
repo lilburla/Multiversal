@@ -5,17 +5,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util.RobotConfig;
+import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util.RobotConfigReader;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class NewMecanumDrive{
     private DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     private IMU imu;
 
-    public void init(HardwareMap hwMap){
-        frontLeftMotor = hwMap.get(DcMotor.class, "front_left_drive");
-        frontRightMotor = hwMap.get(DcMotor.class, "front_right_drive");
-        backLeftMotor = hwMap.get(DcMotor.class, "back_left_drive");
-        backRightMotor = hwMap.get(DcMotor.class, "back_right_drive");
+    public void init(HardwareMap hwMap, RobotConfig config){
+        frontLeftMotor = hwMap.get(DcMotor.class, config.getFrontLeftDriveName());
+        frontRightMotor = hwMap.get(DcMotor.class, config.getFrontRightDriveName());
+        backLeftMotor = hwMap.get(DcMotor.class, config.getBackLeftDriveName());
+        backRightMotor = hwMap.get(DcMotor.class, config.getBackRightDriveName());
 
         frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
@@ -25,7 +27,7 @@ public class NewMecanumDrive{
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        imu = hwMap.get(IMU.class, "imu");
+        imu = hwMap.get(IMU.class, config.getImuName());
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP
