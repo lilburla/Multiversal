@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.code.Robot;
+package org.firstinspires.ftc.teamcode.code.Archives.Robot;
 
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.code.Robot.Util.RobotConfig;
+import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util.RobotConfig;
 import org.firstinspires.ftc.teamcode.code.Robot.Util.RobotConfigReader;
 
 public class ConfiguredRobot {
@@ -37,8 +37,8 @@ public class ConfiguredRobot {
         flywheelMotor1 = getMotor(hardwareMap, config.getFlywheelMotor1Name(), DcMotor.Direction.FORWARD);
         flywheelMotor2 = getMotor(hardwareMap, config.getFlywheelMotor2Name(), DcMotor.Direction.FORWARD);
 
-        if (isConfigured(config.getServoName())) {
-            servo = hardwareMap.get(Servo.class, config.getServoName());
+        if (isConfigured(config.getShootingServoName())) {
+            servo = hardwareMap.get(Servo.class, config.getShootingServoName());
             servo.setDirection(Servo.Direction.FORWARD);
         }
         if (isConfigured(config.getLimelightName())) {

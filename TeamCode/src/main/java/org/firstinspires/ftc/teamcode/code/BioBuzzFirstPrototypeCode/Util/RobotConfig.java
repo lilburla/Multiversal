@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.code.Robot.Util;
+package org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util;
 
 import java.util.Map;
 
@@ -58,7 +58,7 @@ public class RobotConfig {
         return get("flywheelMotor2Name");
     }
 
-    public String getFlowerIntakeServo1Name() {return get("flowerIntakeServo1")}
+    public String getFlowerIntakeServo1Name() {return get("flowerIntakeServo1");}
 
-    public String getFlowerIntakeServo2Name() {return get("flowerIntakeServo2")}
+    public String getFlowerIntakeServo2Name() {return get("flowerIntakeServo2");}
 }
