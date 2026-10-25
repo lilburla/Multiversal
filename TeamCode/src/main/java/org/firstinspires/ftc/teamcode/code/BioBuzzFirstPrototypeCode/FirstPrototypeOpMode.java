@@ -42,7 +42,7 @@ public class FirstPrototypeOpMode extends OpMode {
     boolean leftTriggerPressed, rightTriggerPressed, m1Pressed, m2Pressed;
     @Override
     public void init() {
-        drive.init(hardwareMap);
+        drive.init(hardwareMap, config);
         flowerIntakeServo2.reverse();
     }
 
