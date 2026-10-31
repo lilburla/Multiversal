@@ -14,7 +14,7 @@ public class AprilTag {
     private double ty;
     private double ta;
     private boolean hasTarget;
-
+/*
     public void init(ConfiguredRobot robot) {
         limelight = robot.limelight;
         imu = robot.imu;
@@ -22,7 +22,7 @@ public class AprilTag {
             limelight.pipelineSwitch(0);
         }
     }
-
+*/
     public void start() {
         if (limelight != null) {
             limelight.start();

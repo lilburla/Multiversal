@@ -31,19 +31,19 @@ public class FirstPrototypeOpMode extends OpMode {
     NewMotor flyWheelMotor1 = new NewMotor(hardwareMap, config.getFlywheelMotor1Name());
     NewMotor flyWheelMotor2 = new NewMotor(hardwareMap, config.getFlywheelMotor2Name());
 
-    //Intake/Outtake Motors
+    //Intake Motor
     NewMotor intakeMotor = new NewMotor(hardwareMap, config.getIntakeMotorName());
 
     //Flower intake servos flower_intake_servo_1
-    NewPositionalServo flowerIntakeServo1 = new NewPositionalServo(hardwareMap, config.getFlowerIntakeServo1Name());
-    NewPositionalServo flowerIntakeServo2 = new NewPositionalServo(hardwareMap, config.getFlowerIntakeServo2Name());
+    //NewPositionalServo flowerIntakeServo1 = new NewPositionalServo(hardwareMap, config.getFlowerIntakeServo1Name());
+    //NewPositionalServo flowerIntakeServo2 = new NewPositionalServo(hardwareMap, config.getFlowerIntakeServo2Name());
 
     //booleans
     boolean leftTriggerPressed, rightTriggerPressed, m1Pressed, m2Pressed;
     @Override
     public void init() {
         drive.init(hardwareMap, config);
-        flowerIntakeServo2.reverse();
+        //flowerIntakeServo2.reverse();
     }
 
     @Override
@@ -67,16 +67,16 @@ public class FirstPrototypeOpMode extends OpMode {
         }else{
             shootingServo.setServoPos(0.5);
         }
-        if(gamepad1.left_bumper){
+        /*if(gamepad1.left_bumper){
             flowerIntakeServo1.setServoPos(0.5);
             flowerIntakeServo2.setServoPos(0.5);
         }else{
             flowerIntakeServo1.setServoPos(1);
             flowerIntakeServo2.setServoPos(1);
-        }
+        }*/
         flyWheelMotor1.setPower(0.35);
         flyWheelMotor2.setPower(-0.35);
-        //REMAP TO BACK RIGHT/BACK LEFT BUTTONS WHEN I FIND OUT HOW :skull:
+        //REMAP TO BACK RIGHT/BACK LEFT BUTTONS WHEN I FIND OUT HOW :skull: - fixed
         if(m1Pressed){ //intake - back right button
             intakeMotor.setPower(0.6);
         }else if(m2Pressed){ //outtake - back left button

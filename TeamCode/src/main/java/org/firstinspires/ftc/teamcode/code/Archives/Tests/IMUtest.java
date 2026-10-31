@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.code.Robot.ConfiguredRobot;
 
+/*
 @TeleOp(name = "IMU Test", group = "Tests")
 public class IMUtest extends OpMode {
     private ConfiguredRobot robot;
@@ -22,3 +22,4 @@ public class IMUtest extends OpMode {
         telemetry.addData("Heading (rad)", robot.getHeading(AngleUnit.RADIANS));
     }
 }
+*/

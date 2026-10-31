@@ -4,8 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.code.Robot.AprilTag;
-import org.firstinspires.ftc.teamcode.code.Robot.ConfiguredRobot;
-
+/*
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp", group = "Competition")
 public class TeleOp extends OpMode {
     private ConfiguredRobot robot;
@@ -49,3 +48,4 @@ public class TeleOp extends OpMode {
         aprilTag.stop();
     }
 }
+*/
