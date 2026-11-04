@@ -1,0 +1,38 @@
+# Drivetrain - from MecanumTuner
+frontLeftName: "front_left_drive"
+frontRightName: "front_right_drive"
+backLeftName: "back_left_drive"
+backRightName: "back_right_drive"
+frontLeftDirection: "REVERSE"
+frontRightDirection: "FORWARD"
+backLeftDirection: "REVERSE"
+backRightDirection: "FORWARD"
+
+# Localizer - from PinpointTuner
+# podType: FOUR_BAR or SWING_ARM
+pinpointName: "pinpoint"
+podType: "FOUR_BAR"
+xPodOffset: 0.0
+yPodOffset: 0.0
+xPodDirection: "FORWARD"
+yPodDirection: "FORWARD"
+
+# Foresight - from ForesightTuner
+forwardTranslationalPrimary: 0.1
+forwardTranslationalSecondary: 0.1
+strafeTranslationalPrimary: 0.1
+strafeTranslationalSecondary: 0.1
+translationalThreshold: 2.5
+coast: 0.0
+brake: 0.0
+headingFeedback: 1.0
+headingBrakeLinear: 0.0
+headingBrakeQuadratic: 0.0
+forwardBrakeLinear: 0.0
+strafeBrakeLinear: 0.0
+forwardBrakeQuadratic: 0.0
+strafeBrakeQuadratic: 0.0
+maxAchievableForwardVelocity: 60.0
+maxAchievableStrafeVelocity: 45.0
+naturalForwardDeceleration: 30.0
+naturalStrafeDeceleration: 50.0

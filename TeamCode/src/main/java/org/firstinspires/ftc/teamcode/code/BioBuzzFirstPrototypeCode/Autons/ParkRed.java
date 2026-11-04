@@ -1,33 +1,50 @@
 package org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Autons;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import static com.pedropathing.api.Paths.line;
 
-import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.HardwareSetup.NewMecanumDrive;
-import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util.RobotConfig;
-import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.Util.RobotConfigReader;
+import com.pedropathing.api.PoseFactory;
+import com.pedropathing.follower.Follower;
+import com.pedropathing.math.Pose;
+import com.pedropathing.paths.Path;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+
+import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.PedroPathing.Constants;
 
 @Autonomous(name = "Park Red", group = "Red")
-public class ParkRed extends LinearOpMode {
-    private static final double DRIVE_POWER = 0.4;
-    private static final long PARK_MS = 1200;
+public class ParkRed extends OpMode {
+    private final PoseFactory poses = PoseFactory.degrees();
+    private final Pose startPose = poses.of(8, 40, 0);
+    private final Pose parkPose = poses.of(30, 40, 0);
 
-    private final NewMecanumDrive drive = new NewMecanumDrive();
+    private Follower follower;
 
-    @Override
-    public void runOpMode() {
-        RobotConfig config = RobotConfigReader.read(hardwareMap);
-        drive.init(hardwareMap, config);
-
-        waitForStart();
-
-        forward(DRIVE_POWER, PARK_MS);
-        drive.drive(0, 0, 0, false);
+    private Path park() {
+        return line(startPose, parkPose).linear(startPose, parkPose);
     }
 
-    private void forward(double power, long milliseconds) {
-        drive.drive(power, 0, 0, false);
-        sleep(milliseconds);
-        drive.drive(0, 0, 0, false);
+    @Override
+    public void init() {
+        follower = Constants.create(hardwareMap);
+        follower.setPose(startPose);
+        follower.update();
+    }
+
+    @Override
+    public void start() {
+        follower.follow(park());
+    }
+
+    @Override
+    public void loop() {
+        follower.update();
+        telemetry.addData("X", follower.pose().x());
+        telemetry.addData("Y", follower.pose().y());
+        telemetry.addData("Busy", follower.isBusy());
+    }
+
+    @Override
+    public void stop() {
+        follower.stop();
     }
 }

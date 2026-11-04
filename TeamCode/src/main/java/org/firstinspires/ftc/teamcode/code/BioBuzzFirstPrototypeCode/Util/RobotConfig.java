@@ -19,23 +19,23 @@ public class RobotConfig {
     }
 
     public String getFrontLeftDriveName() {
-        return get("frontLeftDrive");
+        return get("frontLeftDriveName");
     }
 
     public String getFrontRightDriveName() {
-        return get("frontRightDrive");
+        return get("frontRightDriveName");
     }
 
     public String getBackLeftDriveName() {
-        return get("backLeftDrive");
+        return get("backLeftDriveName");
     }
 
     public String getBackRightDriveName() {
-        return get("backRightDrive");
+        return get("backRightDriveName");
     }
 
     public String getShootingServoName() {
-        return get("servoGate");
+        return get("shootingServoName");
     }
 
     public String getLimelightName() {
@@ -43,7 +43,7 @@ public class RobotConfig {
     }
 
     public String getIntakeMotorName() {
-        return get("intakeMotor");
+        return get("intakeMotorName");
     }
 
     public String getImuName() {
@@ -51,11 +51,11 @@ public class RobotConfig {
     }
 
     public String getFlywheelMotor1Name() {
-        return get("rightShooter");
+        return get("flywheelMotor1Name");
     }
 
     public String getFlywheelMotor2Name() {
-        return get("leftShooter");
+        return get("flywheelMotor2Name");
     }
 
 }
