@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PedroConfig {
-    private final Map<String, String> values;
+
+   private final Map<String, String> values;
 
     public PedroConfig(Map<String, String> values) {
         this.values = values;

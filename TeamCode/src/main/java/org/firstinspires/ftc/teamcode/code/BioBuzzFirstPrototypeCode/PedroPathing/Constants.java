@@ -16,6 +16,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.code.BioBuzzFirstPrototypeCode.PedroPathing.procedures.PinpointTuner;
 
 public class Constants {
 
@@ -32,6 +33,17 @@ public class Constants {
         });
     }
 
+    public static MecanumConfig drivetrainConfig = new MecanumConfig(c -> {
+            c.frontLeftName.set("front_left_drive");
+            c.frontRightName.set("front_right_drive");
+            c.backLeftName.set("back_left_drive");
+            c.backRightName.set("back_right_drive");
+            c.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+            c.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
+            c.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+            c.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
+    });
+
     public static PinpointConfig localizerConfig(PedroConfig cfg) {
         return new PinpointConfig(c -> {
             c.name.set(cfg.getString("pinpointName", "pinpoint"));
@@ -44,6 +56,17 @@ public class Constants {
             c.offsetUnits.set(DistanceUnit.INCH);
         });
     }
+    //Placeholders - change later
+    public static PinpointConfig localizerConfig= new PinpointConfig(c -> {
+            c.name.set("");
+            c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD);
+            c.xPodOffset.set(0.0);
+            c.yPodOffset.set(0.0);
+            c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            c.yPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
+            c.globalDistanceUnit.set(DistanceUnit.INCH);
+            c.offsetUnits.set(DistanceUnit.INCH);
+        });
 
     public static ForesightConfig foresightConfig(PedroConfig cfg) {
         return new ForesightConfig(c -> {
