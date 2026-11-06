@@ -58,8 +58,8 @@ public class Constants {
     }
     //Placeholders - change later
     public static PinpointConfig localizerConfig= new PinpointConfig(c -> {
-            c.name.set("");
-            c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_SWINGARM_POD);
+            c.name.set("pinpoint");
+            c.podType.set(GoBildaPinpointDriver.GoBildaOdometryPods.goBILDA_4_BAR_POD);
             c.xPodOffset.set(0.0);
             c.yPodOffset.set(0.0);
             c.xPodDirection.set(GoBildaPinpointDriver.EncoderDirection.FORWARD);
