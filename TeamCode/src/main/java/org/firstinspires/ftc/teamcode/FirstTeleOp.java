@@ -11,8 +11,9 @@ import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
 @TeleOp
 public class FirstTeleOp extends OpMode {
     private static final double TRIGGER_THRESHOLD = 0.8;
-    private static final double FLYWHEEL_POWER = 0.32;
+    private static final double FLYWHEEL_POWER = 0.305;
     private static final double INTAKE_POWER = 0.45;
+
     private static final double GATE_OPEN = 0;
     private static final double GATE_CLOSED = 1;
     private static final double REG_MODE = 0.6;
@@ -57,12 +58,10 @@ public class FirstTeleOp extends OpMode {
             setPos(GATE_CLOSED);
         }
 
-        if (gamepad1.a) {
-            intake.setPower(-1 * INTAKE_POWER);
-        } else if (gamepad1.b) {
+        if (gamepad1.b) {
             intake.setPower(INTAKE_POWER);
         } else {
-            intake.setPower(0);
+            intake.setPower(-1 * INTAKE_POWER);
         }
 
         if (gamepad1.dpad_left) {
