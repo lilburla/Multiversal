@@ -15,8 +15,8 @@ public class ParkAuton extends LinearOpMode {
     private static final double TRIGGER_THRESHOLD = 0.8;
     private static final double FLYWHEEL_POWER = 0.25;
     private static final double INTAKE_POWER = 0.4;
-    private static final double GATE_OPEN = 1;
-    private static final double GATE_CLOSED = 0.5;
+    private static final double GATE_OPEN = 0;
+    private static final double GATE_CLOSED = 1;
 
     MechanumDrive drive = new MechanumDrive();
     private DcMotor fly1, fly2, intake;
@@ -44,14 +44,6 @@ public class ParkAuton extends LinearOpMode {
             timer.reset();
 
             while (opModeIsActive() && timer.milliseconds() < 1500) {}
-
-            drive.drive(0.0, 0.0, 0.0);
-            sleep(200);
-            drive.resetHeading();
-
-            drive.drive(0.0, 0.0, 0.3);
-
-            while (opModeIsActive() && drive.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) > -90.0) {}
 
             drive.drive(0.0, 0.0, 0.0);
         }

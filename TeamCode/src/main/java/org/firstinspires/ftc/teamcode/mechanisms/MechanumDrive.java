@@ -78,4 +78,8 @@ public class MechanumDrive {
     public YawPitchRollAngles getRobotYawPitchRollAngles() {
         return imu.getRobotYawPitchRollAngles();
     }
+
+    public double getHeading() {
+        return imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+    }
 }

@@ -13,8 +13,10 @@ public class FirstTeleOp extends OpMode {
     private static final double TRIGGER_THRESHOLD = 0.8;
     private static final double FLYWHEEL_POWER = 0.32;
     private static final double INTAKE_POWER = 0.45;
-    private static final double GATE_OPEN = 1;
-    private static final double GATE_CLOSED = 0.5;
+    private static final double GATE_OPEN = 0;
+    private static final double GATE_CLOSED = 1;
+    private static final double REG_MODE = 0.6;
+    private static final double SLOW_MODE = 0.15;
     MechanumDrive drive = new MechanumDrive();
     double forward, strafe, rotate;
     private DcMotor fly1, fly2, intake;
@@ -44,9 +46,9 @@ public class FirstTeleOp extends OpMode {
         rotate = gamepad1.right_stick_x;
 
         if (gamepad1.left_trigger >= TRIGGER_THRESHOLD) {
-            drive.driveFieldOriented(forward * 0.05, strafe * 0.05, rotate * 0.05);
+            drive.driveFieldOriented(forward * SLOW_MODE, strafe * SLOW_MODE, rotate * SLOW_MODE);
         } else {
-            drive.driveFieldOriented(forward * 0.6, strafe * 0.6, rotate * 0.6);
+            drive.driveFieldOriented(forward * REG_MODE, strafe * REG_MODE, rotate * REG_MODE);
         }
 
         if (gamepad1.right_trigger >= TRIGGER_THRESHOLD) {
