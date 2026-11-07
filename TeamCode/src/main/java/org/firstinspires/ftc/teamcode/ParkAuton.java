@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
 
 @Autonomous
@@ -42,6 +44,14 @@ public class ParkAuton extends LinearOpMode {
             timer.reset();
 
             while (opModeIsActive() && timer.milliseconds() < 1500) {}
+
+            drive.drive(0.0, 0.0, 0.0);
+            sleep(200);
+            drive.resetHeading();
+
+            drive.drive(0.0, 0.0, 0.3);
+
+            while (opModeIsActive() && drive.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES) > -90.0) {}
 
             drive.drive(0.0, 0.0, 0.0);
         }

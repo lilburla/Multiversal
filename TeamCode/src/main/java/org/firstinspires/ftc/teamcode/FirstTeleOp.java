@@ -62,5 +62,9 @@ public class FirstTeleOp extends OpMode {
         } else {
             intake.setPower(0);
         }
+
+        if (gamepad1.dpad_left) {
+            drive.resetHeading();
+        }
     }
 }
