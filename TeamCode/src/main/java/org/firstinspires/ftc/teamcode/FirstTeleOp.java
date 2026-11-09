@@ -2,70 +2,48 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.ConfiguredRobot;
+import org.firstinspires.ftc.teamcode.mechanisms.Constants;
 
 @TeleOp
 public class FirstTeleOp extends OpMode {
-    private static final double TRIGGER_THRESHOLD = 0.8;
-    private static final double FLYWHEEL_POWER = 0.305;
-    private static final double INTAKE_POWER = 0.45;
-
-    private static final double GATE_OPEN = 0;
-    private static final double GATE_CLOSED = 1;
-    private static final double REG_MODE = 0.6;
-    private static final double SLOW_MODE = 0.15;
-    MechanumDrive drive = new MechanumDrive();
+    ConfiguredRobot robot = new ConfiguredRobot();
     double forward, strafe, rotate;
-    private DcMotor fly1, fly2, intake;
-    private Servo gate;
-
-    public void setPos(double angle) {
-        gate.setPosition(angle);
-    }
 
     @Override
     public void init() {
-        drive.init(hardwareMap);
-        fly1 = hardwareMap.get(DcMotor.class, "flywheel_1");
-        fly2 = hardwareMap.get(DcMotor.class, "flywheel_2");
-        intake = hardwareMap.get(DcMotor.class, "intake_motor");
-        gate = hardwareMap.get(Servo.class, "shooting_servo");
-        setPos(GATE_CLOSED);
+        robot.init(hardwareMap);
+        telemetry.addLine("Init Complete");
     }
 
     @Override
     public void loop() {
-        fly1.setPower(FLYWHEEL_POWER);
-        fly2.setPower(-1 * FLYWHEEL_POWER);
-
+        robot.runShooter();
         forward = -1 * gamepad1.left_stick_y;
         strafe = gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
 
-        if (gamepad1.left_trigger >= TRIGGER_THRESHOLD) {
-            drive.driveFieldOriented(forward * SLOW_MODE, strafe * SLOW_MODE, rotate * SLOW_MODE);
+        if (gamepad1.left_trigger >= Constants.TRIGGER_THRESHOLD) {
+            robot.drive(forward * Constants.SLOW_MODE, strafe * Constants.SLOW_MODE, rotate * Constants.SLOW_MODE);
         } else {
-            drive.driveFieldOriented(forward * REG_MODE, strafe * REG_MODE, rotate * REG_MODE);
+            robot.drive(forward * Constants.REG_MODE, strafe * Constants.REG_MODE, rotate * Constants.REG_MODE);
         }
 
-        if (gamepad1.right_trigger >= TRIGGER_THRESHOLD) {
-            setPos(GATE_OPEN);
+        if (gamepad1.right_trigger >= Constants.TRIGGER_THRESHOLD) {
+            robot.startShooting();
         } else {
-            setPos(GATE_CLOSED);
+            robot.stopShooting();
         }
 
         if (gamepad1.b) {
-            intake.setPower(INTAKE_POWER);
+            robot.outtake();
         } else {
-            intake.setPower(-1 * INTAKE_POWER);
+            robot.intake();
         }
 
         if (gamepad1.dpad_left) {
-            drive.resetHeading();
+            robot.resetHeading();
         }
     }
 }

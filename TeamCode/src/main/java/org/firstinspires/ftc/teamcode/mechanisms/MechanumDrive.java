@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -8,7 +7,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+import java.util.function.BooleanSupplier;
+import com.qualcomm.robotcore.util.Range;
+
 
 public class MechanumDrive {
     private DcMotor frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
@@ -75,8 +76,39 @@ public class MechanumDrive {
         imu.resetYaw();
     }
 
-    public YawPitchRollAngles getRobotYawPitchRollAngles() {
-        return imu.getRobotYawPitchRollAngles();
+    public void turnToAngle(double targetAngleDegrees, double maxPower, BooleanSupplier opModeActive) {
+        double kP = 0.04; // Proportional constant. Adjust this if the robot overshoots or is too slow.
+        double tolerance = 1.5; // Stop turning within 1.5 degrees of accuracy
+        double minPower = 0.15; // Minimum power to overcome friction and static slip
+
+        double error = getAngleError(targetAngleDegrees);
+
+        // Keep turning as long as error is outside tolerance AND user hasn't hit stop
+        while (Math.abs(error) > tolerance && opModeActive.getAsBoolean()) {
+            error = getAngleError(targetAngleDegrees);
+
+            // Proportional power: bigger error = faster turn, smaller error = slower turn
+            double turnPower = error * kP;
+
+            // Cap the speed at maxPower, but make sure it has at least minPower to move
+            turnPower = Range.clip(turnPower, -maxPower, maxPower);
+            if (Math.abs(turnPower) < minPower) {
+                turnPower = Math.signum(turnPower) * minPower;
+            }
+
+            drive(0, 0, turnPower);
+        }
+
+        // Always stop motors when done
+        drive(0, 0, 0);
+    }
+
+    // Helper method to keep error calculated perfectly between -180 and 180
+    private double getAngleError(double targetAngle) {
+        double error = targetAngle - getHeading();
+        while (error > 180)  error -= 360;
+        while (error < -180) error += 360;
+        return error;
     }
 
     public double getHeading() {
