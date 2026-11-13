@@ -31,9 +31,9 @@ public class FirstTeleOp extends OpMode {
         }
 
         if (gamepad1.right_trigger >= Constants.TRIGGER_THRESHOLD) {
-            robot.startShooting();
+            robot.openServoGate();
         } else {
-            robot.stopShooting();
+            robot.closeServoGate();
         }
 
         if (gamepad1.b) {

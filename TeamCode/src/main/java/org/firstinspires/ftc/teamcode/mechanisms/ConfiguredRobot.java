@@ -33,6 +33,7 @@ public class ConfiguredRobot {
         shooter.run();
     }
 
+
     public void intake() {
         intake.inTake();
     }
@@ -41,11 +42,11 @@ public class ConfiguredRobot {
         intake.outTake();
     }
 
-    public void startShooting() {
-        intake.open();
+    public void openServoGate() {
+        shooter.open();
     }
 
-    public void stopShooting() {
-        intake.close();
+    public void closeServoGate() {
+        shooter.close();
     }
 }
