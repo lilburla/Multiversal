@@ -49,4 +49,5 @@ public class ConfiguredRobot {
     public void closeServoGate() {
         shooter.close();
     }
+    public void stopIntake(){intake.stop();}
 }
