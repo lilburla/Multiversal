@@ -41,6 +41,9 @@ public class ConfiguredRobot {
     public void outtake() {
         intake.outTake();
     }
+    public void stopIntakeMotors(){
+        intake.stopIntakePower();
+    }
 
     public void openServoGate() {
         shooter.open();

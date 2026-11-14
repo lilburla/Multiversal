@@ -4,9 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-@TeleOp
+@TeleOp(name = "Flywheel Tuning")
 public class FlywheelTuning extends OpMode {
     private DcMotorEx fly1, fly2;
     public double highVelocity = 1500;
@@ -23,6 +24,9 @@ public class FlywheelTuning extends OpMode {
         fly2 = hardwareMap.get(DcMotorEx.class, "flywheel_2");
         fly1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         fly2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        fly1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        fly2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        fly2.setDirection(DcMotorSimple.Direction.REVERSE);
         PIDFCoefficients pidCoefficients = new PIDFCoefficients(P, 0, 0, F);
         fly1.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidCoefficients);
         fly2.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidCoefficients);
@@ -68,7 +72,7 @@ public class FlywheelTuning extends OpMode {
 
         telemetry.addData("TargetVelocity", curTargetVelocity);
         telemetry.addData("Current Velocity", "%.2f", curAvgVelocity);
-        telemetry.addData("Error", "%.2", error);
+        telemetry.addData("Error", "%.2f", error);
         telemetry.addLine("---------------------------------------");
         telemetry.addData("Tuning P", "%.4f (D-pad U/D)", P);
         telemetry.addData("Tuning F", "%.4f (D-pad L/R)", F);

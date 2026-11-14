@@ -21,4 +21,8 @@ public class Intake {
     public void outTake() {
         intake.setPower(Constants.INTAKE_POWER);
     }
+
+    public void stopIntakePower(){
+        intake.setPower(0);
+    }
 }

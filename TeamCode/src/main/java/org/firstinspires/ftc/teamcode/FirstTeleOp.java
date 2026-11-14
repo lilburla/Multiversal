@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Constants;
 public class FirstTeleOp extends OpMode {
     ConfiguredRobot robot = new ConfiguredRobot();
     double forward, strafe, rotate;
+    private int velocityToAddToFlywheel = 100;
 
     @Override
     public void init() {
@@ -38,12 +39,34 @@ public class FirstTeleOp extends OpMode {
 
         if (gamepad1.b) {
             robot.outtake();
-        } else {
+        } else if (gamepad1.a){
             robot.intake();
+        }else{
+            robot.stopIntakeMotors();
         }
 
         if (gamepad1.dpad_left) {
             robot.resetHeading();
         }
+
+        //Testing
+        if(gamepad1.dpadRightWasPressed()){
+            if(velocityToAddToFlywheel == 1){
+                velocityToAddToFlywheel = 100;
+            }else {
+                velocityToAddToFlywheel /= 10;
+            }
+        }
+        if(gamepad1.leftBumperWasPressed()){
+            Constants.FLYWHEEL_VELOCITY -= velocityToAddToFlywheel;
+        }else if (gamepad1.rightBumperWasPressed()){
+            Constants.FLYWHEEL_VELOCITY += velocityToAddToFlywheel;
+
+        }
+        telemetry.addData("velocity: ", Constants.FLYWHEEL_VELOCITY);
+        telemetry.addData("step: ", velocityToAddToFlywheel);
+
+
+
     }
 }

@@ -3,17 +3,15 @@ package org.firstinspires.ftc.teamcode.HardcodedAutons;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.mechanisms.ConfiguredRobot;
-import org.firstinspires.ftc.teamcode.mechanisms.Intake;
-import org.firstinspires.ftc.teamcode.mechanisms.MechanumDrive;
+
 //IMPORTANT: THIS AUTON IS MADE WITH ESTIMATED VALUES, MOST LIKELY WONT WORK PERFECTLY, NEED TO BRUTE FORCE DEBUG
+//REASON I NAMED THIS BOTH IS BECAUSE THE FIELD IS SYMMETRICAL WITH RESPECT TO THE VERY MIDDLE (rotating half the field upside down will result in them perfectly layering on eachother)
 @Autonomous
-public class ShootCollectThenShootRed extends LinearOpMode {
+public class ShootCollectThenShoot extends LinearOpMode {
 
     private static final double TRIGGER_THRESHOLD = 0.8;
     private static final double FLYWHEEL_POWER = 0.25;
@@ -26,8 +24,10 @@ public class ShootCollectThenShootRed extends LinearOpMode {
     private ElapsedTime timer;
 
     private Servo leftFlowerIntakeServo, rightFlowerIntakeServo;
-    private final double movingConstant = 0.4;
-    private final double rotateConstant = 0.4;
+    private final double MOVING_CONSTANT = 0.4;
+    private final double ROTATE_CONSTANT = 0.4;
+
+    private final int TURN_NINETY_DEGREES_WAIT_TIME_MILLISECONDS = 500;
 
 
     @Override
@@ -44,22 +44,22 @@ public class ShootCollectThenShootRed extends LinearOpMode {
             shoot();
             timer.reset();
             //Intake corner balls
-            robot.driveAuton(0.0, 0.0, -rotateConstant);
-            wait(500);
-            robot.driveAuton(movingConstant,0,0);
+            robot.driveAuton(0.0, 0.0, -ROTATE_CONSTANT);
+            wait(TURN_NINETY_DEGREES_WAIT_TIME_MILLISECONDS);
+            robot.driveAuton(MOVING_CONSTANT,0,0);
             wait(1000);
-            robot.driveAuton(0.0, 0.0, rotateConstant);
-            wait(500);
-            robot.driveAuton(-movingConstant, 0.0, 0.0);
+            robot.driveAuton(0.0, 0.0, ROTATE_CONSTANT);
+            wait(TURN_NINETY_DEGREES_WAIT_TIME_MILLISECONDS);
+            robot.driveAuton(-MOVING_CONSTANT, 0.0, 0.0);
             wait(250);
             //intaking balls
             robot.driveAuton(0,0,0);
             wait(2000);
             //Moving to other side of hive
-            robot.driveAuton(movingConstant, movingConstant/2, 0);
+            robot.driveAuton(MOVING_CONSTANT, MOVING_CONSTANT/2, 0);
             wait(3000);
-            robot.driveAuton(0,0,rotateConstant);
-            wait(1000);
+            robot.driveAuton(0,0,ROTATE_CONSTANT);
+            wait(TURN_NINETY_DEGREES_WAIT_TIME_MILLISECONDS*2);
             shoot();
             /*
             //Flower intake - HELLA scuffed
@@ -86,16 +86,17 @@ public class ShootCollectThenShootRed extends LinearOpMode {
             shoot();
             //parking
             */
-            robot.driveAuton(0,0,rotateConstant);
-            wait(500);
-            robot.driveAuton(movingConstant,0,0);
+            robot.driveAuton(0,0,ROTATE_CONSTANT);
+            wait(TURN_NINETY_DEGREES_WAIT_TIME_MILLISECONDS);
+            robot.driveAuton(MOVING_CONSTANT,0,0);
             wait(1000);
+            robot.driveAuton(0,0,0);
         }
 
     }
     public void shoot(){
         robot.openServoGate();
-        wait(1000);
+        wait(3000);
         robot.closeServoGate();
     }
     public void wait(int milliseconds){
