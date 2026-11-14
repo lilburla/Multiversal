@@ -50,22 +50,12 @@ public class FirstTeleOp extends OpMode {
         }
 
         //Testing
-        if(gamepad1.dpadRightWasPressed()){
-            if(velocityToAddToFlywheel == 1){
-                velocityToAddToFlywheel = 100;
-            }else {
-                velocityToAddToFlywheel /= 10;
-            }
+        if (gamepad2.leftBumperWasPressed()){
+            Constants.FLYWHEEL_VELOCITY = 155;
+        }else if(gamepad2.rightBumperWasPressed()){
+            Constants.FLYWHEEL_VELOCITY = 205;
         }
-        if(gamepad1.leftBumperWasPressed()){
-            Constants.FLYWHEEL_VELOCITY -= velocityToAddToFlywheel;
-        }else if (gamepad1.rightBumperWasPressed()){
-            Constants.FLYWHEEL_VELOCITY += velocityToAddToFlywheel;
-
-        }
-        telemetry.addData("velocity: ", Constants.FLYWHEEL_VELOCITY);
-        telemetry.addData("step: ", velocityToAddToFlywheel);
-
+        telemetry.addData("Flywheel Velocity: ", Constants.FLYWHEEL_VELOCITY);
 
 
     }

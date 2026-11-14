@@ -13,7 +13,7 @@ public class Constants {
 
     //Flywheel
 //TEMPORARILY NOT FINAL TO TEST FLYWHEEL SPEED FOR TELEOP
-    public static double FLYWHEEL_VELOCITY = 500;
+    public static double FLYWHEEL_VELOCITY = 155;
     //LEFT FLYWHEEL = FLYWHEEL1 (idk if thats left or right but whatever u get for tuning flywheel 1 put below)
     public static final double LEFT_FLYWHEEL_P = 95.5964;
     public static final double LEFT_FLYWHEEL_F = 12.8500;
